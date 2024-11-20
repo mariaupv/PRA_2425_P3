@@ -6,7 +6,7 @@
 #include "Dict.h"
 #include "TableEntry.h"
 
-#include "/mnt/c/Users/Usuario/OneDrive/Escritorio/Universidad/2_CARRERA/PRA/practicas/PRA_2425_P1/PRA_2425_P1/ListLinked.h"
+#include ".../PRA_2425_P1/PRA_2425_P1/ListLinked.h" //Modificado
 
 using namespace std;
 template <typename V>
