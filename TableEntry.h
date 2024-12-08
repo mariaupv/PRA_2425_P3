@@ -1,7 +1,7 @@
 #ifndef TABLEENTRY_H
 #define TABLEENTRY_H
 
-#include <string>
+#include <string> 
 #include <ostream>
 using namespace std;
 template <typename V>
@@ -16,10 +16,11 @@ class TableEntry{
 		}
 		TableEntry(string key){
 			this->key = key;
+			this->value = V();
 		}
 		TableEntry(){
 			key = "";
-			value = 0;
+			value = V();
 		}
 		friend bool operator==(const TableEntry<V> &te1, const TableEntry<V> &te2){
 			if(te1.key == te2.key){
@@ -38,9 +39,24 @@ class TableEntry{
 		}
 
 		friend ostream& operator<<(ostream &out, const TableEntry<V> &te){
-			out << "('" << te.key << "' => " << te.value << ")" << endl;
+			out << "('" << te.key << "' => " << te.value << ")";
 			return out;
 		}
 
+		friend bool operator<(const TableEntry<V> &te1, const TableEntry<V> &te2){
+			if(te1.key < te2.key){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		friend bool operator>(const TableEntry<V> &te1, const TableEntry<V> &te2){
+			if(te1.key > te2.key){
+				return true;
+			}else{
+				return false;
+			}
+		}
 };
 #endif

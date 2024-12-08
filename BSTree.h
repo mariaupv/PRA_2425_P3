@@ -3,7 +3,6 @@
 
 #include <ostream>
 #include <stdexcept>
-
 #include <stdio.h>
 #include <stdlib.h>   
 #include <iostream> 
@@ -12,8 +11,8 @@ using namespace std;
 template <typename T>
 class BSTree{
 	private:
-		int nelem; //n elem almacenados en ABB
-		BSNode<T> *root; // nodo raíz de ABB
+		int nelem = 0; //n elem almacenados en ABB
+		BSNode<T>* root; // nodo raíz de ABB
 	//Búsqueda de elementos
 		BSNode<T>* search(BSNode<T>* n, T e)const{
 			if(n == nullptr){
@@ -63,15 +62,17 @@ class BSTree{
 				if(n->left != nullptr && n->right != nullptr){
 					n->elem = max(n->left);
 					n->left = remove_max(n->left);
+					
 				}else{
 					BSNode<T>* temp = n;
 					n = (n->left != nullptr)? n->left : n->right;
 					delete temp;
+					
 				}
 			}
 			return n;
 		}
-		T max(BSNode<T>* n){
+		T max(BSNode<T>* n) const{
 			if( n == nullptr){
 				throw runtime_error("Árbol vacío\n");
 			}else if(n->right != nullptr){
@@ -82,6 +83,8 @@ class BSTree{
 		}
 		BSNode<T>* remove_max(BSNode<T>* n){
 			if(n->right == nullptr){
+				BSNode<T>* aux = n;
+				delete aux;
 				return n->left;
 			}else{
 				n->right = remove_max(n->right);
@@ -115,13 +118,13 @@ class BSTree{
 		}
 
 		T operator[](T e) const{
-			return search(e);
+			return search(root, e)->elem;
 		}
 
 	//Inserción de elementos
 		void insert(T e){
 			root = insert(root, e);
-			nelem++;
+			//nelem++;
 		}
 
 	//Recorrido e impresión del árbol
